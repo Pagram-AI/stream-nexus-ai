@@ -33,9 +33,6 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-3">
-          <a href="#cta" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-            Run a Node
-          </a>
           <a
             href="#cta"
             className="px-4 py-2 rounded-lg text-sm font-medium bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
