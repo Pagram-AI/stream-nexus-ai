@@ -7,7 +7,7 @@ const navLinks = [
   { label: "How It Works", href: "#how-it-works" },
   { label: "Node Economy", href: "#node-economy" },
   { label: "Use Cases", href: "#use-cases" },
-  { label: "Roadmap", href: "#roadmap" },
+  
 ];
 
 const Navbar = () => {
