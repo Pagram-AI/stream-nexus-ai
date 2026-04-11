@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "@/assets/logo.png";
 
 const Footer = () => {
@@ -12,7 +13,7 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-sm mb-3">Protocol</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Documentation</a></li>
+              <li><Link to="/docs" className="hover:text-foreground transition-colors">Documentation</Link></li>
               <li><a href="#" className="hover:text-foreground transition-colors">Whitepaper</a></li>
               <li><a href="#" className="hover:text-foreground transition-colors">GitHub</a></li>
             </ul>
