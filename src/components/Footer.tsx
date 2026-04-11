@@ -29,7 +29,7 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold text-sm mb-3">Resources</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-foreground transition-colors">Blog</a></li>
+              <li><a href="https://medium.com/@pagramai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Blog</a></li>
               <li><a href="#" className="hover:text-foreground transition-colors">Brand Kit</a></li>
               <li><a href="#" className="hover:text-foreground transition-colors">Careers</a></li>
             </ul>
