@@ -14,7 +14,7 @@ const Footer = () => {
             <h4 className="font-heading font-semibold text-sm mb-3">Protocol</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link to="/docs" className="hover:text-foreground transition-colors">Documentation</Link></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">Whitepaper</a></li>
+              <li><a href="https://docsend.com/view/8f6f44tzc79turmf" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Whitepaper</a></li>
               <li><a href="#" className="hover:text-foreground transition-colors">GitHub</a></li>
             </ul>
           </div>
