@@ -1,10 +1,12 @@
+import logo from "@/assets/logo.png";
+
 const Footer = () => {
   return (
     <footer className="border-t border-border/30 py-12 px-4">
       <div className="container mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div>
-            <span className="font-heading font-bold text-lg gradient-text">StreamAI</span>
+            <img src={logo} alt="PGRM" className="h-[5.75rem]" />
             <p className="text-xs text-muted-foreground mt-2">Decentralized AI livestream enhancement protocol.</p>
           </div>
           <div>
