@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const NetworkBackground = () => (
   <div className="absolute inset-0 overflow-hidden">
@@ -76,12 +77,12 @@ const HeroSection = () => {
           >
             Launch App <ArrowRight size={16} />
           </a>
-          <a
-            href="#node-economy"
+          <Link
+            to="/run-node"
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg font-medium border border-border/60 text-foreground hover:bg-secondary/50 transition-all"
           >
             <Play size={16} /> Run a Node
-          </a>
+          </Link>
         </motion.div>
 
         <motion.div
