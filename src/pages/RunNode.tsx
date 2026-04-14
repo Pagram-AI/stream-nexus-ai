@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -21,6 +22,7 @@ import {
   Zap,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { supabase } from "@/integrations/supabase/client";
 
 const sidebarSections = [
   { id: "overview", label: "Overview", icon: Cpu },
@@ -55,6 +57,57 @@ const CodeBlock = ({ children, title }: { children: string; title?: string }) =>
 );
 
 const RunNode = () => {
+  const [walletAddress, setWalletAddress] = useState("");
+  const [walletType, setWalletType] = useState<"evm" | "solana">("evm");
+  const [registrationStatus, setRegistrationStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [registrationMessage, setRegistrationMessage] = useState("");
+
+  const handleRegister = async () => {
+    if (!walletAddress.trim()) {
+      setRegistrationStatus("error");
+      setRegistrationMessage("Please enter a wallet address.");
+      return;
+    }
+
+    // Basic validation
+    const isEvm = /^0x[a-fA-F0-9]{40}$/.test(walletAddress.trim());
+    const isSolana = /^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(walletAddress.trim());
+
+    if (walletType === "evm" && !isEvm) {
+      setRegistrationStatus("error");
+      setRegistrationMessage("Invalid EVM wallet address. Must start with 0x followed by 40 hex characters.");
+      return;
+    }
+    if (walletType === "solana" && !isSolana) {
+      setRegistrationStatus("error");
+      setRegistrationMessage("Invalid Solana wallet address.");
+      return;
+    }
+
+    setRegistrationStatus("loading");
+    try {
+      const { error } = await supabase
+        .from("node_registrations")
+        .insert({ wallet_address: walletAddress.trim().toLowerCase(), wallet_type: walletType });
+
+      if (error) {
+        if (error.code === "23505") {
+          setRegistrationStatus("error");
+          setRegistrationMessage("This wallet is already registered! You can access your dashboard.");
+        } else {
+          setRegistrationStatus("error");
+          setRegistrationMessage("Registration failed. Please try again.");
+        }
+      } else {
+        setRegistrationStatus("success");
+        setRegistrationMessage("Wallet registered successfully! You can now access your Node Dashboard.");
+      }
+    } catch {
+      setRegistrationStatus("error");
+      setRegistrationMessage("An unexpected error occurred. Please try again.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Top bar */}
@@ -653,6 +706,92 @@ pgrm-cli rewards history --period 30d`}
                 assignments receive up to a <strong className="text-foreground">2x reward multiplier</strong>. 
                 Check your score anytime with <code className="text-accent">pgrm-cli quality</code>.
               </p>
+            </div>
+          </motion.section>
+
+          {/* Register Wallet Section */}
+          <motion.section id="register" className="mb-20" {...fadeIn}>
+            <p className="text-sm text-accent font-medium mb-3 uppercase tracking-widest">Get Started</p>
+            <h2 className="text-2xl md:text-4xl font-heading font-bold mb-6">
+              Register Your <span className="gradient-text">Wallet</span>
+            </h2>
+            <p className="text-muted-foreground leading-relaxed mb-8">
+              Register your wallet address to join the PGRM node operator program. Once registered, you'll 
+              get access to the Node Dashboard to monitor your performance and earnings.
+            </p>
+
+            <div className="glass-card neon-border p-8">
+              <div className="space-y-6">
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-2 block">Wallet Type</label>
+                  <div className="flex gap-3">
+                    {(["evm", "solana"] as const).map((type) => (
+                      <button
+                        key={type}
+                        onClick={() => setWalletType(type)}
+                        className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                          walletType === type
+                            ? "bg-primary text-primary-foreground"
+                            : "glass-card text-muted-foreground hover:text-foreground"
+                        }`}
+                      >
+                        {type === "evm" ? "EVM (MetaMask)" : "Solana (Phantom)"}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <label className="text-sm font-medium text-foreground mb-2 block">Wallet Address</label>
+                  <input
+                    type="text"
+                    value={walletAddress}
+                    onChange={(e) => {
+                      setWalletAddress(e.target.value);
+                      setRegistrationStatus("idle");
+                    }}
+                    placeholder={walletType === "evm" ? "0x..." : "Enter Solana address..."}
+                    className="w-full px-4 py-3 rounded-xl bg-secondary/60 border border-border/50 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 text-sm font-mono"
+                  />
+                </div>
+
+                {registrationStatus !== "idle" && registrationStatus !== "loading" && (
+                  <div className={`flex items-center gap-2 text-sm ${
+                    registrationStatus === "success" ? "text-green-500" : "text-destructive"
+                  }`}>
+                    {registrationStatus === "success" ? <CheckCircle2 size={16} /> : <AlertTriangle size={16} />}
+                    {registrationMessage}
+                  </div>
+                )}
+
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <button
+                    onClick={handleRegister}
+                    disabled={registrationStatus === "loading"}
+                    className="bg-primary text-primary-foreground px-6 py-3 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
+                  >
+                    {registrationStatus === "loading" ? (
+                      <>
+                        <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                        Registering...
+                      </>
+                    ) : (
+                      <>
+                        <Shield size={16} />
+                        Register Wallet
+                      </>
+                    )}
+                  </button>
+                  
+                  <Link
+                    to="/connect-wallet"
+                    className="glass-card hover-glow px-6 py-3 rounded-xl text-sm font-medium flex items-center justify-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <BarChart3 size={16} />
+                    View Node Dashboard
+                  </Link>
+                </div>
+              </div>
             </div>
           </motion.section>
 
