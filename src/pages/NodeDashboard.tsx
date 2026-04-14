@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
   Cpu,
@@ -109,6 +109,7 @@ const StatCard = ({
 );
 
 const NodeDashboard = () => {
+  const navigate = useNavigate();
   const [nodeStatus, setNodeStatus] = useState<"online" | "paused" | "offline">("online");
   const [perfData, setPerfData] = useState(generatePerformanceData);
   const [earningsData] = useState(generateEarningsData);
@@ -116,6 +117,14 @@ const NodeDashboard = () => {
   const [gpuTemp, setGpuTemp] = useState(67);
   const [uptime, setUptime] = useState(0);
   const [expandedLog, setExpandedLog] = useState(false);
+
+  // Check wallet auth
+  useEffect(() => {
+    const wallet = sessionStorage.getItem("pgrm_wallet");
+    if (!wallet) {
+      navigate("/connect-wallet", { replace: true });
+    }
+  }, [navigate]);
 
   // Simulate live updates
   useEffect(() => {
