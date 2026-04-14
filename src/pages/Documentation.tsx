@@ -343,13 +343,6 @@ pgrm-cli status`}
               </p>
             </div>
 
-            <Link
-              to="/node-dashboard"
-              className="inline-flex items-center gap-2 mt-6 bg-primary text-primary-foreground px-6 py-3 rounded-xl text-sm font-medium hover:opacity-90 transition-opacity"
-            >
-              <BarChart3 size={16} />
-              View Node Dashboard
-            </Link>
           </motion.section>
 
           {/* Tokenomics */}
