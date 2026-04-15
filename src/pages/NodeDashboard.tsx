@@ -179,10 +179,10 @@ const NodeDashboard = () => {
           </div>
           <div className="flex items-center gap-3">
             <Link
-              to="/docs"
+              to="/run-node"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              <ArrowLeft size={14} /> Back to Docs
+              <ArrowLeft size={14} /> To Nodes
             </Link>
           </div>
         </div>
