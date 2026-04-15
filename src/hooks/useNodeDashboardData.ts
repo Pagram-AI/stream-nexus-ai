@@ -94,14 +94,6 @@ export function useNodeDashboardData(walletAddress: string | null) {
     if (!walletAddress) return;
 
     try {
-      setError(null);
-      const { data: responseData, error: fnError } = await supabase.functions.invoke("node-stats", {
-        method: "GET",
-        body: undefined,
-        headers: { "Content-Type": "application/json" },
-      });
-
-      // supabase.functions.invoke doesn't support query params, so we use fetch directly
       const projectId = import.meta.env.VITE_SUPABASE_PROJECT_ID;
       const anonKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
       const url = `https://${projectId}.supabase.co/functions/v1/node-stats?wallet=${encodeURIComponent(walletAddress)}`;
