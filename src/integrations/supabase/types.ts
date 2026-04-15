@@ -14,6 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
+      node_earnings: {
+        Row: {
+          amount: number
+          earned_at: string
+          id: string
+          task_count: number
+          wallet_address: string
+        }
+        Insert: {
+          amount?: number
+          earned_at?: string
+          id?: string
+          task_count?: number
+          wallet_address: string
+        }
+        Update: {
+          amount?: number
+          earned_at?: string
+          id?: string
+          task_count?: number
+          wallet_address?: string
+        }
+        Relationships: []
+      }
+      node_performance: {
+        Row: {
+          cpu_usage: number
+          disk_total_gb: number
+          disk_used_gb: number
+          gpu_temp: number
+          gpu_usage: number
+          id: string
+          is_online: boolean
+          memory_usage: number
+          recorded_at: string
+          wallet_address: string
+        }
+        Insert: {
+          cpu_usage?: number
+          disk_total_gb?: number
+          disk_used_gb?: number
+          gpu_temp?: number
+          gpu_usage?: number
+          id?: string
+          is_online?: boolean
+          memory_usage?: number
+          recorded_at?: string
+          wallet_address: string
+        }
+        Update: {
+          cpu_usage?: number
+          disk_total_gb?: number
+          disk_used_gb?: number
+          gpu_temp?: number
+          gpu_usage?: number
+          id?: string
+          is_online?: boolean
+          memory_usage?: number
+          recorded_at?: string
+          wallet_address?: string
+        }
+        Relationships: []
+      }
       node_registrations: {
         Row: {
           created_at: string
@@ -32,6 +95,66 @@ export type Database = {
           id?: string
           wallet_address?: string
           wallet_type?: string
+        }
+        Relationships: []
+      }
+      node_staking: {
+        Row: {
+          apy: number
+          id: string
+          next_tier_threshold: number
+          staked_amount: number
+          tier: string
+          updated_at: string
+          wallet_address: string
+        }
+        Insert: {
+          apy?: number
+          id?: string
+          next_tier_threshold?: number
+          staked_amount?: number
+          tier?: string
+          updated_at?: string
+          wallet_address: string
+        }
+        Update: {
+          apy?: number
+          id?: string
+          next_tier_threshold?: number
+          staked_amount?: number
+          tier?: string
+          updated_at?: string
+          wallet_address?: string
+        }
+        Relationships: []
+      }
+      node_tasks: {
+        Row: {
+          completed_at: string
+          description: string | null
+          id: string
+          status: string
+          task_ref: string
+          task_type: string
+          wallet_address: string
+        }
+        Insert: {
+          completed_at?: string
+          description?: string | null
+          id?: string
+          status?: string
+          task_ref: string
+          task_type: string
+          wallet_address: string
+        }
+        Update: {
+          completed_at?: string
+          description?: string | null
+          id?: string
+          status?: string
+          task_ref?: string
+          task_type?: string
+          wallet_address?: string
         }
         Relationships: []
       }
