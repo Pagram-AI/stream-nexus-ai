@@ -29,6 +29,7 @@ const sidebarSections = [
   { id: "architecture", label: "Architecture", icon: Layers },
   { id: "features", label: "Core Features", icon: Sparkles },
   { id: "node-setup", label: "Node Setup", icon: Cpu },
+  { id: "node-agent", label: "Python Agent", icon: Terminal },
   { id: "tokenomics", label: "Tokenomics", icon: Coins },
   { id: "api-reference", label: "API Reference", icon: Code },
   { id: "sdk", label: "SDK & Libraries", icon: Terminal },
@@ -343,6 +344,65 @@ pgrm-cli status`}
               </p>
             </div>
 
+          </motion.section>
+
+          {/* Python Node Agent */}
+          <motion.section id="node-agent" className="mb-20" {...fadeIn}>
+            <p className="text-sm text-accent font-medium mb-3 uppercase tracking-widest">Lightweight Agent</p>
+            <h2 className="text-2xl md:text-4xl font-heading font-bold mb-6">Python Node Agent</h2>
+            <p className="text-muted-foreground leading-relaxed mb-8">
+              A lightweight Python script that reports real hardware metrics (CPU, memory, GPU, disk) 
+              to the PGRM network without needing Docker.
+            </p>
+
+            <div className="glass-card p-6 mb-6">
+              <h3 className="font-heading font-semibold text-lg mb-3">Quick Setup</h3>
+              <CodeBlock title="Terminal">
+{`# Download agent & dependencies
+curl -O https://pgrm.network/pgrm_node_agent.py
+curl -O https://pgrm.network/requirements.txt
+
+# Install
+pip install -r requirements.txt
+
+# Run
+python pgrm_node_agent.py --wallet <YOUR_WALLET_ADDRESS>`}
+              </CodeBlock>
+            </div>
+
+            <div className="glass-card p-6 mb-6">
+              <h3 className="font-heading font-semibold text-lg mb-3">Reported Metrics</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                {[
+                  "CPU Usage (%)",
+                  "Memory Usage (%)",
+                  "GPU Load (%) & Temperature",
+                  "Disk Used / Total (GB)",
+                ].map((m) => (
+                  <div key={m} className="flex items-center gap-2">
+                    <ChevronRight size={14} className="text-accent shrink-0" />
+                    <span className="text-muted-foreground">{m}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <a
+                href="/pgrm_node_agent.py"
+                download
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
+              >
+                <Terminal size={16} /> Download Agent
+              </a>
+              <a
+                href="/requirements.txt"
+                download
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border text-sm font-medium hover:bg-secondary/60 transition-colors"
+              >
+                <Code size={16} /> requirements.txt
+              </a>
+            </div>
           </motion.section>
 
           {/* Tokenomics */}
