@@ -28,6 +28,7 @@ const sidebarSections = [
   { id: "overview", label: "Overview", icon: Cpu },
   { id: "requirements", label: "Requirements", icon: Server },
   { id: "installation", label: "Installation", icon: Download },
+  { id: "python-agent", label: "Python Agent", icon: Terminal },
   { id: "configuration", label: "Configuration", icon: Settings },
   { id: "launching", label: "Launch Node", icon: Play },
   { id: "staking", label: "Staking", icon: Coins },
@@ -328,6 +329,97 @@ docker images | grep pgrm`,
                   </div>
                 </div>
               ))}
+            </div>
+          </motion.section>
+
+          {/* Python Agent */}
+          <motion.section id="python-agent" className="mb-20" {...fadeIn}>
+            <p className="text-sm text-accent font-medium mb-3 uppercase tracking-widest">Lightweight Agent</p>
+            <h2 className="text-2xl md:text-4xl font-heading font-bold mb-6">Python Node Agent</h2>
+            <p className="text-muted-foreground leading-relaxed mb-8">
+              Prefer a lightweight setup without Docker? Run the PGRM Python agent to report real hardware 
+              metrics (CPU, memory, GPU, disk) directly to the network.
+            </p>
+
+            <div className="space-y-6">
+              <div className="glass-card p-6">
+                <h3 className="font-heading font-semibold text-lg mb-3">Requirements</h3>
+                <p className="text-sm text-muted-foreground mb-3">Python 3.8+ and an NVIDIA GPU (optional but recommended).</p>
+                <CodeBlock title="requirements.txt">
+{`psutil>=5.9.0
+GPUtil>=1.4.0`}
+                </CodeBlock>
+              </div>
+
+              <div className="glass-card p-6">
+                <h3 className="font-heading font-semibold text-lg mb-3">Quick Start</h3>
+                <CodeBlock title="Terminal">
+{`# Download the agent
+curl -O https://pgrm.network/pgrm_node_agent.py
+curl -O https://pgrm.network/requirements.txt
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the agent with your registered wallet
+python pgrm_node_agent.py --wallet <YOUR_WALLET_ADDRESS>`}
+                </CodeBlock>
+              </div>
+
+              <div className="glass-card p-6">
+                <h3 className="font-heading font-semibold text-lg mb-3">Run as a Background Service</h3>
+                <CodeBlock title="systemd (Linux)">
+{`sudo tee /etc/systemd/system/pgrm-agent.service << 'EOF'
+[Unit]
+Description=PGRM Node Agent
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/pgrm/pgrm_node_agent.py --wallet YOUR_WALLET
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl enable pgrm-agent
+sudo systemctl start pgrm-agent`}
+                </CodeBlock>
+              </div>
+
+              <div className="glass-card p-6">
+                <h3 className="font-heading font-semibold text-lg mb-3">CLI Options</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+                  {[
+                    { flag: "--wallet", desc: "Your registered wallet address (required)" },
+                    { flag: "--interval", desc: "Report interval in seconds (default: 30)" },
+                  ].map((opt) => (
+                    <div key={opt.flag} className="flex items-start gap-3">
+                      <code className="text-accent text-xs bg-secondary/60 px-2 py-0.5 rounded shrink-0">{opt.flag}</code>
+                      <span className="text-muted-foreground">{opt.desc}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <a
+                  href="/pgrm_node_agent.py"
+                  download
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors"
+                >
+                  <Download size={16} /> Download Agent
+                </a>
+                <a
+                  href="/requirements.txt"
+                  download
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-border text-sm font-medium hover:bg-secondary/60 transition-colors"
+                >
+                  <Download size={16} /> requirements.txt
+                </a>
+              </div>
             </div>
           </motion.section>
 
