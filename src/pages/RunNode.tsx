@@ -395,6 +395,7 @@ sudo systemctl start pgrm-agent`}
                   {[
                     { flag: "--wallet", desc: "Your registered wallet address (required)" },
                     { flag: "--interval", desc: "Report interval in seconds (default: 30)" },
+                    { flag: "--simulate-tasks", desc: "Demo mode: also report synthetic tasks + earnings" },
                   ].map((opt) => (
                     <div key={opt.flag} className="flex items-start gap-3">
                       <code className="text-accent text-xs bg-secondary/60 px-2 py-0.5 rounded shrink-0">{opt.flag}</code>

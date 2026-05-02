@@ -24,16 +24,27 @@ python pgrm_node_agent.py --wallet <YOUR_WALLET_ADDRESS>
 
 ## Options
 
-| Flag         | Description                          | Default |
-|-------------|--------------------------------------|---------|
-| `--wallet`  | Your registered wallet address       | Required |
-| `--interval`| Report interval in seconds           | 30      |
+| Flag                | Description                                              | Default  |
+|---------------------|----------------------------------------------------------|----------|
+| `--wallet`          | Your registered wallet address                           | Required |
+| `--interval`        | Report interval in seconds                               | 30       |
+| `--simulate-tasks`  | Demo mode: also report synthetic tasks + earnings        | Off      |
 
 ## Example
 
 ```bash
 python pgrm_node_agent.py --wallet 0x1234abcd...5678ef --interval 60
 ```
+
+## Demo Mode
+
+To see your dashboard light up end-to-end without waiting for real network tasks, enable simulation:
+
+```bash
+python pgrm_node_agent.py --wallet 0x1234abcd...5678ef --simulate-tasks
+```
+
+Every cycle the agent will additionally report a synthetic task (inference / training / embedding) and a small PGRM earnings entry. Real hardware metrics are still reported as normal. Use this for testing only.
 
 ## What It Reports
 

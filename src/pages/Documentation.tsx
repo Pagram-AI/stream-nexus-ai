@@ -366,7 +366,10 @@ curl -O https://pgrm.network/requirements.txt
 pip install -r requirements.txt
 
 # Run
-python pgrm_node_agent.py --wallet <YOUR_WALLET_ADDRESS>`}
+python pgrm_node_agent.py --wallet <YOUR_WALLET_ADDRESS>
+
+# Or, demo mode (also reports synthetic tasks + earnings)
+python pgrm_node_agent.py --wallet <YOUR_WALLET_ADDRESS> --simulate-tasks`}
               </CodeBlock>
             </div>
 
