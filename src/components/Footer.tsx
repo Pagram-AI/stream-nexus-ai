@@ -22,7 +22,7 @@ const Footer = () => {
             <h4 className="font-heading font-semibold text-sm mb-3">Community</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><a href="https://x.com/PGRM_APP" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Twitter</a></li>
-              <li><a href="https://t.me/Pagramai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Telegram</a></li>
+              <li><a href="https://t.me/Pagramai_official" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">Telegram</a></li>
               
             </ul>
           </div>
