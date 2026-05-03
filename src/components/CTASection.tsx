@@ -23,9 +23,6 @@ const CTASection = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <button className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg font-medium bg-primary text-primary-foreground hover:opacity-90 transition-all neon-glow">
-              Launch App <ArrowRight size={16} />
-            </button>
             <Link to="/run-node" className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg font-medium border border-border/60 text-foreground hover:bg-secondary/50 transition-all">
               <Server size={16} /> Become a Node Operator
             </Link>
