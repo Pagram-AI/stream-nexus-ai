@@ -33,14 +33,7 @@ const Navbar = () => {
           ))}
         </div>
 
-        <div className="hidden md:flex items-center gap-3">
-          <a
-            href="#cta"
-            className="px-4 py-2 rounded-lg text-sm font-medium bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
-          >
-            Launch App
-          </a>
-        </div>
+        <div className="hidden md:flex items-center gap-3" />
 
         <button
           className="md:hidden text-foreground"
@@ -69,9 +62,6 @@ const Navbar = () => {
                   {link.label}
                 </a>
               ))}
-              <a href="#cta" className="px-4 py-2 rounded-lg text-sm font-medium bg-primary text-primary-foreground text-center">
-                Launch App
-              </a>
             </div>
           </motion.div>
         )}

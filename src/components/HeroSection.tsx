@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const NetworkBackground = () => (
@@ -71,12 +71,6 @@ const HeroSection = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.45 }}
         >
-          <a
-            href="#cta"
-            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg font-medium bg-primary text-primary-foreground hover:opacity-90 transition-all neon-glow"
-          >
-            Launch App <ArrowRight size={16} />
-          </a>
           <Link
             to="/run-node"
             className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-lg font-medium border border-border/60 text-foreground hover:bg-secondary/50 transition-all"
