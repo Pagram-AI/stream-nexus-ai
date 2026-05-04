@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound.tsx";
 import NodeDashboard from "./pages/NodeDashboard.tsx";
 import RunNode from "./pages/RunNode.tsx";
 import ConnectWallet from "./pages/ConnectWallet.tsx";
+import SupportChat from "./components/SupportChat.tsx";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <SupportChat />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
