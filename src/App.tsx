@@ -25,7 +25,6 @@ const App = () => (
           <Route path="/run-node" element={<RunNode />} />
           <Route path="/node-dashboard" element={<NodeDashboard />} />
           <Route path="/connect-wallet" element={<ConnectWallet />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
         <SupportChat />
